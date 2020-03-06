@@ -4,10 +4,18 @@ using System.Threading;
 
 namespace ConsoleProgressBar
 {
+    /// <summary>
+    /// Represents a text-based progress bar for tracking file transfers in C# console applications. 
+    /// </summary>
     public class FileTransferProgressBar : ConsoleProgressBar
     {
-        long _lastReportTicks;
+        private long _lastReportTicks;
 
+        /// <summary>
+        /// Creates a new instances of the FileTransferProgressBar type.
+        /// </summary>
+        /// <param name="fileSizeInBytes">The size of the file to transfer, in bytes.</param>
+        /// <param name="timeout">The period of time which indicates the file transfer has stalled if no data is received.</param>
         public FileTransferProgressBar(long fileSizeInBytes, TimeSpan timeout)
         {
             _lastReportTicks = DateTime.Now.Ticks;
@@ -15,63 +23,69 @@ namespace ConsoleProgressBar
             FileSizeInBytes = fileSizeInBytes;
             BytesReceived = 0;
             TimeSpanFileStalled = timeout;
-            DisplayBytes = true;
 
             Timer = new Timer(TimerHandler);
-
-            // A progress bar is only for temporary display in a console window.
-            // If the console output is redirected to a file, draw nothing.
-            // Otherwise, we'll end up with a lot of garbage in the target file.
-            if (!Console.IsOutputRedirected)
-            {
-                ResetTimer();
-            }
+            RestartTimer();
         }
 
-        public long FileSizeInBytes { get; set; }
-        public long BytesReceived { get; set; }
-        public TimeSpan TimeSpanFileStalled { get; set; }
-        public bool DisplayBytes { get; set; }
+        /// <summary>
+        /// Gets the size of the file being transferred, in bytes.
+        /// </summary>
+        public long FileSizeInBytes { get; }
 
+        /// <summary>
+        /// Gets or sets the number of bytes that have been transferred. 
+        /// </summary>
+        public long BytesReceived { get; set; }
+
+        /// <summary>
+        /// Gets the timeout period which determines whether a file transfer has stalled.
+        /// </summary>
+        public TimeSpan TimeSpanFileStalled { get; }
+
+        /// <summary>
+        /// True to display the number of bytes transferred. False to turn off. The default is true. 
+        /// </summary>
+        public bool DisplayBytes { get; set; } = true;
+
+        /// <summary>
+        /// When raised, indicates that the file transfer has stalled.
+        /// </summary>
         public event EventHandler<ProgressEventArgs> FileTransferStalled;
 
-        public new void Report(double value)
+        /// <inheritdoc />
+        public override void Report(double value)
         {
             var ticks = DateTime.Now.Ticks;
             Interlocked.Exchange(ref _lastReportTicks, ticks);
-
-            // Make sure value is in [0..1] range
-            value = Math.Max(0, Math.Min(1, value));
-            Interlocked.Exchange(ref CurrentProgress, value);
+            base.Report(value);
         }
 
-        void TimerHandler(object state)
+        private void TimerHandler(object state)
         {
             lock (Timer)
             {
-                if (Disposed) return;
+                if (IsDisposed) 
+                    return;
+
                 var elapsedTicks = DateTime.Now.Ticks - _lastReportTicks;
                 var elapsed = TimeSpan.FromTicks(elapsedTicks);
 
-                UpdateText(GetProgressBarText(CurrentProgress));
-                ResetTimer();
+                UpdateText(GetProgressBarText());
+                RestartTimer();
 
-                if (elapsed < TimeSpanFileStalled) return;
+                if (elapsed < TimeSpanFileStalled) 
+                    return;
 
-                FileTransferStalled?.Invoke(this,
-                new ProgressEventArgs
-                {
-                    LastDataReceived = new DateTime(_lastReportTicks),
-                    TimeOutTriggered = DateTime.Now
-                });
+                FileTransferStalled?.Invoke(this, new ProgressEventArgs(new DateTime(_lastReportTicks), DateTime.Now));
             }
         }
 
-        string GetProgressBarText(double currentProgress)
+        private string GetProgressBarText()
         {
             const string singleSpace = " ";
 
-            var numBlocksCompleted = (int)(currentProgress * NumberOfBlocks);
+            var numBlocksCompleted = (int)(CurrentProgress * NumberOfBlocks);
 
             var completedBlocks = Enumerable.Range(0, numBlocksCompleted)
                 .Aggregate(string.Empty, (current, _) => current + CompletedBlock);
@@ -80,7 +94,7 @@ namespace ConsoleProgressBar
                 .Aggregate(string.Empty, (current, _) => current + IncompleteBlock);
 
             var progressBar = $"{StartBracket}{completedBlocks}{incompleteBlocks}{EndBracket}";
-            var percent = $"{currentProgress:P0}".PadLeft(4, '\u00a0');
+            var percent = $"{CurrentProgress:P0}".PadLeft(4, '\u00a0');
 
             string fileSizeInBytes = new FileSize(FileSizeInBytes);
             var padLength = fileSizeInBytes.Length;
@@ -89,11 +103,11 @@ namespace ConsoleProgressBar
 
             var animationFrame = AnimationSequence[AnimationIndex++ % AnimationSequence.Length];
             var animation = $"{animationFrame}";
-            progressBar = DisplayBar ? progressBar + singleSpace : string.Empty;
+            progressBar = DisplayBars ? progressBar + singleSpace : string.Empty;
             percent = DisplayPercentComplete ? percent + singleSpace : string.Empty;
             bytes = DisplayBytes ? bytes + singleSpace : string.Empty;
 
-            if (!DisplayAnimation || currentProgress is 1)
+            if (!DisplayAnimation || CurrentProgress is 1)
                 animation = string.Empty;
 
             return progressBar + bytes + percent + animation;

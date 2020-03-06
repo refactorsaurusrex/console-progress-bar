@@ -9,8 +9,6 @@ namespace ConsoleProgressBar.Demo
         // new version if this is flagged as an error
         private static async Task Main()
         {
-            Console.Clear();
-            await Task.Delay(2000);
             await ConsoleProgressBars();
             Console.WriteLine();
 
@@ -20,29 +18,31 @@ namespace ConsoleProgressBar.Demo
 
         private static async Task ConsoleProgressBars()
         {
-            var pb1 = new global::ConsoleProgressBar.ConsoleProgressBar();
+            var pb1 = new ConsoleProgressBar { ForegroundColor = ConsoleColor.Cyan };
             await TestProgressBar(pb1, 1);
 
-            var pb2 = new global::ConsoleProgressBar.ConsoleProgressBar
+            var pb2 = new ConsoleProgressBar
             {
-                NumberOfBlocks = 18,
+                NumberOfBlocks = 30,
+                ForegroundColor = ConsoleColor.Cyan,
                 StartBracket = string.Empty,
                 EndBracket = string.Empty,
                 CompletedBlock = "\u2022",
                 IncompleteBlock = "·",
-                AnimationSequence = ProgressAnimations.RotatingPipe
+                AnimationSequence = UniversalProgressAnimations.Default
             };
             await TestProgressBar(pb2, 2);
 
-            var pb3 = new global::ConsoleProgressBar.ConsoleProgressBar
+            var pb3 = new ConsoleProgressBar
             {
-                DisplayBar = false,
-                AnimationSequence = ProgressAnimations.RotatingTriangle
+                DisplayBars = false,
+                AnimationSequence = UniversalProgressAnimations.RotatingTriangle,
+                ForegroundColor = ConsoleColor.Cyan
             };
             await TestProgressBar(pb3, 3);
         }
 
-        private static async Task TestProgressBar(global::ConsoleProgressBar.ConsoleProgressBar progress, int num)
+        private static async Task TestProgressBar(ConsoleProgressBar progress, int num)
         {
             Console.Write($"{num}. Performing some task... ");
             using (progress)
@@ -65,19 +65,21 @@ namespace ConsoleProgressBar.Demo
             const long fileSize = (long)(8 * FileSize.OneKB);
             var pb4 = new FileTransferProgressBar(fileSize, TimeSpan.FromSeconds(5))
             {
+                ForegroundColor = ConsoleColor.Green,
                 NumberOfBlocks = 15,
                 StartBracket = "|",
                 EndBracket = "|",
                 CompletedBlock = "|",
                 IncompleteBlock = "\u00a0",
-                AnimationSequence = ProgressAnimations.PulsingLine
+                AnimationSequence = UniversalProgressAnimations.PulsingLine
             };
             await TestFileTransferProgressBar(pb4, fileSize, 4);
 
             const long fileSize2 = (long)(100 * 36 * FileSize.OneMB);
             var pb5 = new FileTransferProgressBar(fileSize2, TimeSpan.FromSeconds(5))
             {
-                DisplayBar = false,
+                ForegroundColor = ConsoleColor.Green,
+                DisplayBars = false,
                 DisplayAnimation = false
             };
             pb5.FileTransferStalled += HandleFileTransferStalled;

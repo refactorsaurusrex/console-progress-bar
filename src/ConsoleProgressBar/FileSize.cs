@@ -5,7 +5,7 @@ using System.Security;
 
 namespace ConsoleProgressBar
 {
-    public class FileSize
+    internal class FileSize
     {
         private readonly long _fileSizeInBytes;
 
