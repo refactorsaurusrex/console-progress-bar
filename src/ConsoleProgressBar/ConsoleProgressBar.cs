@@ -1,10 +1,10 @@
-﻿namespace AaronLuna.ConsoleProgressBar
-{
-    using System;
-    using System.Linq;
-    using System.Text;
-    using System.Threading;
+﻿using System;
+using System.Linq;
+using System.Text;
+using System.Threading;
 
+namespace ConsoleProgressBar
+{
     public class ConsoleProgressBar : IDisposable, IProgress<double>
     {
         private readonly TimeSpan _animationInterval = TimeSpan.FromSeconds(1.0 / 8);

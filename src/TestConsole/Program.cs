@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-using AaronLuna.Common.IO;
-using AaronLuna.ConsoleProgressBar;
+using ConsoleProgressBar;
 
 namespace TestConsole
 {
@@ -22,10 +21,10 @@ namespace TestConsole
 
         private static async Task ConsoleProgressBars()
         {
-            var pb1 = new ConsoleProgressBar();
+            var pb1 = new ConsoleProgressBar.ConsoleProgressBar();
             await TestProgressBar(pb1, 1);
 
-            var pb2 = new ConsoleProgressBar
+            var pb2 = new ConsoleProgressBar.ConsoleProgressBar
             {
                 NumberOfBlocks = 18,
                 StartBracket = string.Empty,
@@ -36,7 +35,7 @@ namespace TestConsole
             };
             await TestProgressBar(pb2, 2);
 
-            var pb3 = new ConsoleProgressBar
+            var pb3 = new ConsoleProgressBar.ConsoleProgressBar
             {
                 DisplayBar = false,
                 AnimationSequence = ProgressAnimations.RotatingTriangle
@@ -44,14 +43,14 @@ namespace TestConsole
             await TestProgressBar(pb3, 3);
         }
 
-        private static async Task TestProgressBar(ConsoleProgressBar progress, int num)
+        private static async Task TestProgressBar(ConsoleProgressBar.ConsoleProgressBar progress, int num)
         {
             Console.Write($"{num}. Performing some task... ");
             using (progress)
             {
                 for (var i = 0; i <= 150; i++)
                 {
-                    progress.Report((double) i / 150);
+                    progress.Report((double)i / 150);
                     await Task.Delay(20);
                 }
 
@@ -64,7 +63,9 @@ namespace TestConsole
 
         private static async Task FileTransferProgressBars()
         {
-            const long fileSize = (long) (8 * FileHelper.OneKB);
+#warning Broken.
+            //const long fileSize = (long) (8 * FileHelper.OneKB);
+            const long fileSize = 10000L;
             var pb4 = new FileTransferProgressBar(fileSize, TimeSpan.FromSeconds(5))
             {
                 NumberOfBlocks = 15,
@@ -76,7 +77,9 @@ namespace TestConsole
             };
             await TestFileTransferProgressBar(pb4, fileSize, 4);
 
-            const long fileSize2 = (long) (100 * 36 * FileHelper.OneMB);
+#warning Broken.
+            //const long fileSize2 = (long) (100 * 36 * FileHelper.OneMB);
+            const long fileSize2 = 1000L;
             var pb5 = new FileTransferProgressBar(fileSize2, TimeSpan.FromSeconds(5))
             {
                 DisplayBar = false,
@@ -94,7 +97,7 @@ namespace TestConsole
                 for (var i = 0; i <= 150; i++)
                 {
                     progress.BytesReceived = i * (fileSize / 150);
-                    progress.Report((double) i / 150);
+                    progress.Report((double)i / 150);
                     await Task.Delay(20);
                 }
 
@@ -114,7 +117,7 @@ namespace TestConsole
                 for (var i = 0; i <= 110; i++)
                 {
                     progress.BytesReceived = i * (fileSize / 1000);
-                    progress.Report((double) i / 1000);
+                    progress.Report((double)i / 1000);
                     await Task.Delay(2);
                 }
 
@@ -124,7 +127,7 @@ namespace TestConsole
 
         private static void HandleFileTransferStalled(object sender, ProgressEventArgs eventArgs)
         {
-            var pb = (FileTransferProgressBar) sender;
+            var pb = (FileTransferProgressBar)sender;
             pb.Dispose();
 
             Console.WriteLine($"{Environment.NewLine}{Environment.NewLine}File transfer stalled!");

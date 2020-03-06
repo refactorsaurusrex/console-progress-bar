@@ -1,10 +1,8 @@
-﻿namespace AaronLuna.ConsoleProgressBar
+﻿using System;
+using System.Linq;
+
+namespace ConsoleProgressBar
 {
-    using System;
-    using System.Linq;
-
-    using Microsoft.VisualBasic;
-
     public static class ProgressAnimations
     {
         // These characters render correctly on Windows and Mac
@@ -27,11 +25,13 @@
         {
             var rand = new Random();
             var sequence = string.Empty;
-            foreach(int i in Enumerable.Range(0, 40))
+            foreach (int i in Enumerable.Range(0, 40))
             {
                 var charIndex = rand.Next(10241, 10496);
-                var randChar = Strings.ChrW(charIndex);
-                sequence +=  randChar;
+#warning Broken
+                //var randChar = Strings.ChrW(charIndex);
+                var randChar = ' ';
+                sequence += randChar;
             }
 
             return sequence;
