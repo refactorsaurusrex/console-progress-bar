@@ -73,47 +73,28 @@ namespace ConsoleProgressBar
 
             var numBlocksCompleted = (int)(currentProgress * NumberOfBlocks);
 
-            var completedBlocks =
-                Enumerable.Range(0, numBlocksCompleted).Aggregate(
-                    string.Empty,
-                    (current, _) => current + CompletedBlock);
+            var completedBlocks = Enumerable.Range(0, numBlocksCompleted)
+                .Aggregate(string.Empty, (current, _) => current + CompletedBlock);
 
-            var incompleteBlocks =
-                Enumerable.Range(0, NumberOfBlocks - numBlocksCompleted).Aggregate(
-                    string.Empty,
-                    (current, _) => current + IncompleteBlock);
+            var incompleteBlocks = Enumerable.Range(0, NumberOfBlocks - numBlocksCompleted)
+                .Aggregate(string.Empty, (current, _) => current + IncompleteBlock);
 
             var progressBar = $"{StartBracket}{completedBlocks}{incompleteBlocks}{EndBracket}";
             var percent = $"{currentProgress:P0}".PadLeft(4, '\u00a0');
 
-#warning Broken.
-            //var fileSizeInBytes = FileHelper.FileSizeToString(FileSizeInBytes);
-            var fileSizeInBytes = "";
+            string fileSizeInBytes = new FileSize(FileSizeInBytes);
             var padLength = fileSizeInBytes.Length;
-#warning Broken.
-            //var bytesReceived = FileHelper.FileSizeToString(BytesReceived).PadLeft(padLength, '\u00a0');
-            var bytesReceived = "";
+            var bytesReceived = new FileSize(BytesReceived).ToString().PadLeft(padLength, '\u00a0');
             var bytes = $"{bytesReceived} of {fileSizeInBytes}";
 
             var animationFrame = AnimationSequence[AnimationIndex++ % AnimationSequence.Length];
             var animation = $"{animationFrame}";
-
-            progressBar = DisplayBar
-                ? progressBar + singleSpace
-                : string.Empty;
-
-            percent = DisplayPercentComplete
-                ? percent + singleSpace
-                : string.Empty;
-
-            bytes = DisplayBytes
-                ? bytes + singleSpace
-                : string.Empty;
+            progressBar = DisplayBar ? progressBar + singleSpace : string.Empty;
+            percent = DisplayPercentComplete ? percent + singleSpace : string.Empty;
+            bytes = DisplayBytes ? bytes + singleSpace : string.Empty;
 
             if (!DisplayAnimation || currentProgress is 1)
-            {
                 animation = string.Empty;
-            }
 
             return progressBar + bytes + percent + animation;
         }

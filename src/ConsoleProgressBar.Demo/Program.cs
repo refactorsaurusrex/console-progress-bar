@@ -62,9 +62,7 @@ namespace ConsoleProgressBar.Demo
 
         private static async Task FileTransferProgressBars()
         {
-#warning Broken.
-            //const long fileSize = (long) (8 * FileHelper.OneKB);
-            const long fileSize = 10000L;
+            const long fileSize = (long)(8 * FileSize.OneKB);
             var pb4 = new FileTransferProgressBar(fileSize, TimeSpan.FromSeconds(5))
             {
                 NumberOfBlocks = 15,
@@ -76,9 +74,7 @@ namespace ConsoleProgressBar.Demo
             };
             await TestFileTransferProgressBar(pb4, fileSize, 4);
 
-#warning Broken.
-            //const long fileSize2 = (long) (100 * 36 * FileHelper.OneMB);
-            const long fileSize2 = 1000L;
+            const long fileSize2 = (long)(100 * 36 * FileSize.OneMB);
             var pb5 = new FileTransferProgressBar(fileSize2, TimeSpan.FromSeconds(5))
             {
                 DisplayBar = false,
