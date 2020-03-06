@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using ConsoleProgressBar;
 
-namespace TestConsole
+namespace ConsoleProgressBar.Demo
 {
     internal static class Program
     {
@@ -21,10 +20,10 @@ namespace TestConsole
 
         private static async Task ConsoleProgressBars()
         {
-            var pb1 = new ConsoleProgressBar.ConsoleProgressBar();
+            var pb1 = new global::ConsoleProgressBar.ConsoleProgressBar();
             await TestProgressBar(pb1, 1);
 
-            var pb2 = new ConsoleProgressBar.ConsoleProgressBar
+            var pb2 = new global::ConsoleProgressBar.ConsoleProgressBar
             {
                 NumberOfBlocks = 18,
                 StartBracket = string.Empty,
@@ -35,7 +34,7 @@ namespace TestConsole
             };
             await TestProgressBar(pb2, 2);
 
-            var pb3 = new ConsoleProgressBar.ConsoleProgressBar
+            var pb3 = new global::ConsoleProgressBar.ConsoleProgressBar
             {
                 DisplayBar = false,
                 AnimationSequence = ProgressAnimations.RotatingTriangle
@@ -43,7 +42,7 @@ namespace TestConsole
             await TestProgressBar(pb3, 3);
         }
 
-        private static async Task TestProgressBar(ConsoleProgressBar.ConsoleProgressBar progress, int num)
+        private static async Task TestProgressBar(global::ConsoleProgressBar.ConsoleProgressBar progress, int num)
         {
             Console.Write($"{num}. Performing some task... ");
             using (progress)
