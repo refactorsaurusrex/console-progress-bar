@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ConsoleProgressBar.Demo
@@ -9,11 +11,29 @@ namespace ConsoleProgressBar.Demo
         // new version if this is flagged as an error
         private static async Task Main()
         {
-            await ConsoleProgressBars();
-            Console.WriteLine();
+            while (true)
+            {
+                Console.Clear();
+                await ConsoleProgressBars();
+                Console.WriteLine();
 
-            await FileTransferProgressBars();
-            Console.WriteLine();
+                await FileTransferProgressBars();
+                Console.WriteLine();
+
+                await MarqueeBar();
+                await Task.Delay(3500);
+            }
+        }
+
+        private static async Task MarqueeBar()
+        {
+            var bar = new MarqueeProgressBar
+            {
+                BarForegroundColor = ConsoleColor.Yellow
+            };
+            var ct = new CancellationTokenSource(TimeSpan.FromSeconds(7));
+            await bar.Start("6. Performing some task...", ct.Token);
+            Console.WriteLine("Complete!");
         }
 
         private static async Task ConsoleProgressBars()
