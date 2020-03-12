@@ -14,25 +14,36 @@ namespace ConsoleProgressBar.Demo
             while (true)
             {
                 Console.Clear();
+                Console.Title = "https://github.com/refactorsaurusrex/console-progress-bar";
                 await ConsoleProgressBars();
                 Console.WriteLine();
 
                 await FileTransferProgressBars();
                 Console.WriteLine();
 
-                await MarqueeBar();
+                await MarqueeBars();
                 await Task.Delay(3500);
             }
         }
 
-        private static async Task MarqueeBar()
+        private static async Task MarqueeBars()
         {
-            var bar = new MarqueeProgressBar
+            var bar1 = new MarqueeProgressBar
             {
                 BarForegroundColor = ConsoleColor.Yellow
             };
-            var ct = new CancellationTokenSource(TimeSpan.FromSeconds(7));
-            await bar.Start("6. Performing some task...", ct.Token);
+            var ct1 = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+            await bar1.Start("6. Performing some task...", ct1.Token);
+            Console.WriteLine("Complete!");
+
+            var bar2 = new MarqueeProgressBar
+            {
+                BarForegroundColor = ConsoleColor.Yellow,
+                IncompleteBlock = "·",
+                CompletedBlock = "\u2588"
+            };
+            var ct2 = new CancellationTokenSource(TimeSpan.FromSeconds(5));
+            await bar2.Start("7. Performing some task...", ct2.Token);
             Console.WriteLine("Complete!");
         }
 
