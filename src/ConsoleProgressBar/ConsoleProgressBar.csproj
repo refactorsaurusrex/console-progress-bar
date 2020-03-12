@@ -9,6 +9,8 @@
     <PackageProjectUrl>https://github.com/refactorsaurusrex/console-progress-bar</PackageProjectUrl>
     <RepositoryUrl>https://github.com/refactorsaurusrex/console-progress-bar</RepositoryUrl>
     <PackageTags>progress-bar, csharp, console-app, cross-platform, net-standard</PackageTags>
+    <PackageIcon>progress.png</PackageIcon>
+    <PackageIconUrl />
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
@@ -21,6 +23,10 @@
 
   <ItemGroup>
     <None Remove="ConsoleProgressBar.xml" />
+    <None Include="..\..\images\progress.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
