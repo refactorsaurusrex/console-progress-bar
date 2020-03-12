@@ -11,6 +11,7 @@
     <PackageTags>progress-bar, csharp, console-app, cross-platform, net-standard</PackageTags>
     <PackageIcon>progress.png</PackageIcon>
     <PackageIconUrl />
+    <PackageId>Luna.ConsoleProgressBar</PackageId>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">

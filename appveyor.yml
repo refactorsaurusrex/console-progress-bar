@@ -1,0 +1,18 @@
+version: '{build}'
+image: Visual Studio 2019
+configuration: Release
+platform: Any CPU
+build_script:
+- pwsh: dotnet build .\src\ConsoleProgressBar\ConsoleProgressBar.csproj -c Release -p:Version="1.0.$env:APPVEYOR_BUILD_VERSION"
+artifacts:
+- path: '**\*.nupkg'
+  name: console-progress-bar
+deploy:
+- provider: NuGet
+  api_key:
+    secure: sygyfakm1W9ZWK/vqrUsDz3fqPAbQBvY3kn11MaXYEMqrqhRYW2COpD1ZFVkQHWb
+  on:
+    branch: master
+skip_commits:
+  files:
+    - '**/*.md'
