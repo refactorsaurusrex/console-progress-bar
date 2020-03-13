@@ -1,4 +1,4 @@
-﻿namespace ConsoleProgressBar
+﻿namespace Luna.ConsoleProgressBar
 {
     internal interface IMarqueeParameters
     {

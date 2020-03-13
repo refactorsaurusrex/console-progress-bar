@@ -3,8 +3,8 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <AssemblyName>ConsoleProgressBar.Demo</AssemblyName>
-    <RootNamespace>ConsoleProgressBar.Demo</RootNamespace>
+    <AssemblyName>Luna.ConsoleProgressBar.Demo</AssemblyName>
+    <RootNamespace>Luna.ConsoleProgressBar.Demo</RootNamespace>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -14,6 +14,6 @@
     <LangVersion>Latest</LangVersion>
   </PropertyGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ConsoleProgressBar\ConsoleProgressBar.csproj" />
+    <ProjectReference Include="..\Luna.ConsoleProgressBar\Luna.ConsoleProgressBar.csproj" />
   </ItemGroup>
 </Project>

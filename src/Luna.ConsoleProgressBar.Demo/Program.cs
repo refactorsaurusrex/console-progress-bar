@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ConsoleProgressBar.Demo
+namespace Luna.ConsoleProgressBar.Demo
 {
     internal static class Program
     {

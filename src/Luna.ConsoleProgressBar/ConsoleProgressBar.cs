@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-namespace ConsoleProgressBar
+namespace Luna.ConsoleProgressBar
 {
     /// <summary>
     /// Represents a text-based progress bar, for display in C# console applications. 

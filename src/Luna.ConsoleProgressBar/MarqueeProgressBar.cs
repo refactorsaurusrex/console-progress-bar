@@ -3,7 +3,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace ConsoleProgressBar
+namespace Luna.ConsoleProgressBar
 {
     /// <summary>
     /// Represents a text-based marquee-style progress bar, for display in C# console applications. 

@@ -1,7 +1,8 @@
 ﻿using JetBrains.Annotations;
+
 #pragma warning disable 1591
 
-namespace ConsoleProgressBar
+namespace Luna.ConsoleProgressBar
 {
     /// <summary>
     /// A collection of progress bar animations that work correctly on both Mac and Windows machines.

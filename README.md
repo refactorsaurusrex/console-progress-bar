@@ -41,7 +41,7 @@ dotnet add package Luna.ConsoleProgressBar
 ![Progress Bar_Ubuntu](https://s3-us-west-1.amazonaws.com/alunapublic/console_progress_bar/ProgressBar_Ubuntu.gif)
 
 ## Usage
-Numbers correspond to the examples shown above, full source code for examples can be found in [the demo project](https://github.com/refactorsaurusrex/console-progress-bar/blob/master/src/ConsoleProgressBar.Demo/Program.cs).
+Numbers correspond to the examples shown above, full source code for examples can be found in [the demo project](https://github.com/refactorsaurusrex/console-progress-bar/blob/master/src/Luna.ConsoleProgressBar.Demo/Program.cs).
 ```csharp
 // 1. Default behavior
 var pb1 = new ConsoleProgressBar();
