@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 
-namespace ConsoleProgressBar
+namespace Luna.ConsoleProgressBar
 {
     internal static class Extensions
     {

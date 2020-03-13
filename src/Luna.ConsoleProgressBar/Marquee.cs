@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ConsoleProgressBar
+namespace Luna.ConsoleProgressBar
 {
     internal class Marquee
     {

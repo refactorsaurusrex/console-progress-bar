@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Threading;
 
-namespace ConsoleProgressBar
+namespace Luna.ConsoleProgressBar
 {
     /// <summary>
     /// Represents a text-based progress bar for tracking file transfers in C# console applications. 

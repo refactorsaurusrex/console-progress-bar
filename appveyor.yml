@@ -1,10 +1,10 @@
 version: '{build}'
 image: Visual Studio 2019
 build_script:
-- pwsh: dotnet build .\src\ConsoleProgressBar\ConsoleProgressBar.csproj -c Release -p:Version="1.0.$env:APPVEYOR_BUILD_VERSION"
+- pwsh: dotnet build .\src\Luna.ConsoleProgressBar\Luna.ConsoleProgressBar.csproj -c Release -p:Version="1.0.$env:APPVEYOR_BUILD_VERSION"
 artifacts:
 - path: '**\*.nupkg'
-  name: console-progress-bar
+  name: Luna.ConsoleProgressBar
 deploy:
 - provider: NuGet
   api_key:

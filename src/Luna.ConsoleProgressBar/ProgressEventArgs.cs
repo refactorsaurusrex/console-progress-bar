@@ -1,7 +1,7 @@
 ﻿using System;
 using JetBrains.Annotations;
 
-namespace ConsoleProgressBar
+namespace Luna.ConsoleProgressBar
 {
     /// <inheritdoc />
     [PublicAPI]
