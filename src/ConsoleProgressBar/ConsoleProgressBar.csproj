@@ -15,7 +15,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DocumentationFile>C:\repos\console-progress-bar\src\ConsoleProgressBar\ConsoleProgressBar.xml</DocumentationFile>
+    <DocumentationFile>C:\repos\console-progress-bar\src\ConsoleProgressBar\bin\Release\netstandard2.0\ConsoleProgressBar.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
