@@ -1,7 +1,5 @@
 version: '{build}'
 image: Visual Studio 2019
-configuration: Release
-platform: Any CPU
 build_script:
 - pwsh: dotnet build .\src\ConsoleProgressBar\ConsoleProgressBar.csproj -c Release -p:Version="1.0.$env:APPVEYOR_BUILD_VERSION"
 artifacts:
