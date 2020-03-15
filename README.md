@@ -12,7 +12,7 @@ Install-Package Luna.ConsoleProgressBar
 dotnet add package Luna.ConsoleProgressBar
 ```
 
-![Nuget](https://img.shields.io/nuget/dt/Luna.ConsoleProgressBar?color=brightgreen&logo=nuget&style=for-the-badge) ![Nuget](https://img.shields.io/nuget/v/Luna.ConsoleProgressBar?label=version&logo=nuget&style=for-the-badge) ![AppVeyor branch](https://img.shields.io/appveyor/build/refactorsaurusrex/console-progress-bar/master?logo=appveyor&style=for-the-badge)
+[![Nuget](https://img.shields.io/nuget/dt/Luna.ConsoleProgressBar?color=brightgreen&logo=nuget&style=for-the-badge)](https://www.nuget.org/packages/Luna.ConsoleProgressBar/)  [![Nuget](https://img.shields.io/nuget/v/Luna.ConsoleProgressBar?label=version&logo=nuget&style=for-the-badge)](https://www.nuget.org/packages/Luna.ConsoleProgressBar/)  [![AppVeyor branch](https://img.shields.io/appveyor/build/refactorsaurusrex/console-progress-bar/master?logo=appveyor&style=for-the-badge)](https://www.nuget.org/packages/Luna.ConsoleProgressBar/)
 
 ## Features
 * **ConsoleProgressBar**
