@@ -12,6 +12,8 @@ Install-Package Luna.ConsoleProgressBar
 dotnet add package Luna.ConsoleProgressBar
 ```
 
+![Nuget](https://img.shields.io/nuget/dt/Luna.ConsoleProgressBar?color=brightgreen&logo=nuget&style=for-the-badge) ![Nuget](https://img.shields.io/nuget/v/Luna.ConsoleProgressBar?label=version&logo=nuget&style=for-the-badge) ![AppVeyor branch](https://img.shields.io/appveyor/build/refactorsaurusrex/console-progress-bar/master?logo=appveyor&style=for-the-badge)
+
 ## Features
 * **ConsoleProgressBar**
   * **Implements `IProgress<double>`** The `IProgress` interface greatly simplifies the effort to report progress from an `async` method to the UI, clunky boilerplate code to ensure thread-safety is not required since the `SynchronizationContext` is captured when the progress bar is instantiated.
