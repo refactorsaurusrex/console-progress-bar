@@ -1,6 +1,6 @@
 # Progress Bars for .NET Console Applications
 
-A simple way to represent the progress of long-running tasks in a C# console apps. Targets .NET Standard 2.0.
+A simple way to represent the progress of long-running tasks in C# console apps. Targets .NET Standard 2.0.
 
 ## Installation
 
